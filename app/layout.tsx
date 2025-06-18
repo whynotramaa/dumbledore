@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google"; // Changed from Bricolage_Grotesque
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 const manrope = Manrope({ // Changed variable name and font
   variable: "--font-manrope", // Updated CSS variable name
@@ -19,8 +20,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${manrope.variable} antialiased`}>{children}</body> 
-      
+      <body className={`${manrope.variable} antialiased`}>
+        <Navbar />
+        {children}
+      </body>
+
     </html>
   );
 }
