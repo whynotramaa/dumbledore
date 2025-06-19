@@ -3,6 +3,12 @@ import { Manrope } from "next/font/google"; // Changed from Bricolage_Grotesque
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
+import {
+  ClerkProvider,
+} from '@clerk/nextjs'
+
+
+
 const manrope = Manrope({ // Changed variable name and font
   variable: "--font-manrope", // Updated CSS variable name
   subsets: ["latin"],
@@ -19,12 +25,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${manrope.variable} antialiased`}>
-        <Navbar />
-        {children}
-      </body>
+    <ClerkProvider appearance={{ variables: { colorPrimary: "#fe5933" } }}>
+      <html lang="en">
+        <body className={`${manrope.variable} antialiased`}>
+          <Navbar />
 
-    </html>
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

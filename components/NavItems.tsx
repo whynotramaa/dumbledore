@@ -17,6 +17,7 @@ const navItems = [
         label: "My Journey",
         href: "/my-journey"
     },
+
 ]
 const NavItems = () => {
 
@@ -29,6 +30,9 @@ const NavItems = () => {
                     {label}
                 </Link>
             ))}
+            {/* <Link href='/interview' className="border-2 border-orange-500 py-2 px-4 rounded-lg hover:bg-orange-500 transition-all hover:text-amber-50 hover:font-bold">
+                Interview
+            </Link> */}
         </nav>
     )
 }
