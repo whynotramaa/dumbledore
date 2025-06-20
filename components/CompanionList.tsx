@@ -24,7 +24,7 @@ const CompanionList = ({ title, companions, className }: CompanionsListProps) =>
         <article className={cn('companion-list', className)}>
             <div className="flex items-center justify-between">
                 <h2 className="font-bold text-2xl p-2">
-                    Recent Sessions
+                    {title}
                 </h2>
                 <h4 className="flex md:hidden gap-1 text items-baseline-last text-sm text-gray-400">
                     Swipe <ArrowRightCircle className="size-[12px]" />
@@ -52,7 +52,7 @@ const CompanionList = ({ title, companions, className }: CompanionsListProps) =>
                                             <p className="font-bold text-xl">
                                                 {companion.name}
                                             </p>
-                                            <p className="text-sm text-gray-600">
+                                            <p className="text-sm text-gray-600 truncate overflow-hidden whitespace-nowrap max-md:w-70 w-122">
                                                 {companion.topic}
                                             </p>
                                         </div>
