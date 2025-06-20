@@ -41,7 +41,7 @@ const CompanionList = ({ title, companions, className }: CompanionsListProps) =>
                 <TableBody>
 
                     {companions?.map((companion) => (
-                        <TableRow key={companion.id} >
+                        <TableRow key={companion.id + Math.random()}>
                             <TableCell className="py-4">
                                 <Link href={`/companions/${companion.id}`}>
                                     <div className="flex items-center gap-3">

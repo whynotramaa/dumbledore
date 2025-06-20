@@ -16,7 +16,7 @@ const BecomePro = async () => {
     )
 
     return (
-        <Link href='/companion/new' className="border max-md:hidden transition-all duration-300 py-2 px-4 rounded-lg hover:font-bold hover:bg-primary hover:text-white">
+        <Link href='/companions/new' className="border max-md:hidden transition-all duration-300 py-2 px-4 rounded-lg hover:font-bold hover:bg-primary hover:text-white">
             Make a new Companion
         </Link>
     )
