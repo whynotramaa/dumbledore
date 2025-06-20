@@ -66,7 +66,7 @@ const ProfilePage = async () => {
               ) : (
                 <span className="flex items-center gap-1">
                   <WifiHighIcon className="w-4 text-red-500" />
-                  {LastActive}
+                  {LastActive} IST
                 </span>
               )}
             </div>
