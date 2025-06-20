@@ -1,3 +1,4 @@
+import { AudioLines } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -21,9 +22,10 @@ const CompanionCard = ({ id, name, topic, subject, duration, color }: CompanionC
                     <div className="bg-emerald-50 px-3 py-1 rounded-full text-xs font-semibold">
                         {subject}
                     </div>
-                    <button className="hover:opacity-80 companion-bookmark transition">
+                    {/* <button className="hover:opacity-80 companion-bookmark transition">
                         <Image src="/icons/bookmark.svg" alt="bookmark" width={12.5} height={15} />
-                    </button>
+                    </button> */}
+                    <AudioLines />
                 </div>
 
                 <h2 className="font-bold text-2xl leading-snug">

@@ -20,7 +20,7 @@ const NewCompanionPage = async () => {
   return (
     <main className="min-lg:w-1/3 min-md:w-2/3 items-center justify-center">
       {canCreateCompanion ? (<article className="w-full flex-col">
-        <h1 className="mb-6">
+        <h1 className="mb-6 flex justify-center items-center max-md:p-1 max-md:text-xl">
           Make your own companion.
         </h1>
         <CompanionForm />
