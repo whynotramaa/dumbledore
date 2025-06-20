@@ -184,7 +184,7 @@ const CompanionForm = () => {
                 />
                 <Button
                     type="submit"
-                    className="w-full py-3 font-semibold bg-primary text-white rounded-md hover:bg-primary/90 transition"
+                    className="w-full cursor-pointer py-3 font-semibold bg-primary text-white rounded-md hover:bg-primary/90 transition"
                 >
                     Build your companion
                 </Button>

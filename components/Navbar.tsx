@@ -20,9 +20,12 @@ const Navbar = () => {
                     <Image
                         src="/images/image.png"
                         alt='logo'
-                        height={54}
-                        width={56}
+                        height={34}
+                        width={36}
                     />
+                    <h4 className='font-bold'>
+                        Dumbledore 🎀
+                    </h4>
                 </div>
             </Link>
             <div className="flex items-center gap-8">

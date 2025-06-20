@@ -4,6 +4,7 @@ import { Manrope } from "next/font/google"; // Changed back to Manrope
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 
+
 import {
   ClerkProvider,
 } from '@clerk/nextjs'

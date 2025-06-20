@@ -6,23 +6,37 @@ import { createSupabaseClient } from '../supabase'
 export const createCompanion = async (formData: CreateCompanion) => {
     try {
         const { userId } = await auth()
-        console.log("User ID:", userId)
-
         const supabase = await createSupabaseClient()
-        console.log("Supabase client initialized")
 
+        // Check if a similar companion already exists
+        const { data: existing, error: fetchError } = await supabase
+            .from('companions')
+            .select('id')
+            .eq('author', userId)
+            .eq('name', formData.name)
+            .eq('topic', formData.topic)
+            .maybeSingle()
+
+        if (fetchError) {
+            console.error("Error checking existing companion:", fetchError)
+            throw new Error(fetchError.message)
+        }
+
+        if (existing) {
+            console.log("Companion already exists, skipping insert.")
+            return existing
+        }
+
+        // Insert only if not found
         const { data, error } = await supabase
-            .from('companions') // i had mistakenly named table as Companion -----
+            .from('companions')
             .insert({
                 ...formData,
                 author: userId,
             })
             .select()
 
-        console.log("Insert response:", { data, error })
-
         if (error || !data) {
-            console.error("Insert failed:", error)
             throw new Error(error?.message || 'Failed to create a companion.')
         }
 
