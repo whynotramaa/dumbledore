@@ -34,6 +34,11 @@ export default function RootLayout({
           <Navbar />
 
           {children}
+          <div className="flex justify-center items-center m-12 opacity-25">
+            <p>
+              Made with ❤️ by Rama
+            </p>
+          </div>
         </body>
       </html>
     </ClerkProvider>

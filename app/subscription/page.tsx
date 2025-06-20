@@ -5,6 +5,9 @@ const SubscriptionPage = () => {
   return (
     <main className='flex items-center justify-center p-8'>
       <PricingTable />
+      <p className='text-gray-600'>
+        We are most value-for-money solution you can get in the market.
+      </p>
     </main>
   )
 }

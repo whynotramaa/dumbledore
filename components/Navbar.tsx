@@ -23,7 +23,7 @@ const Navbar = () => {
                         height={34}
                         width={36}
                     />
-                    <h4 className='font-bold'>
+                    <h4 className='font-bold max-md:hidden'>
                         Dumbledore 🎀
                     </h4>
                 </div>
