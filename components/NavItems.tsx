@@ -30,9 +30,7 @@ const NavItems = () => {
                     {label}
                 </Link>
             ))}
-            <Link href='/subscription' className="border max-md:hidden transition-all duration-300 py-2 px-4 rounded-lg hover:font-bold hover:bg-primary hover:text-white">
-                Become a Pro
-            </Link>
+
         </nav>
     )
 }

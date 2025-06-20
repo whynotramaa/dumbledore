@@ -9,6 +9,7 @@ import {
     SignedOut,
     UserButton,
 } from '@clerk/nextjs'
+import BecomePro from './BecomePro'
 
 
 
@@ -30,6 +31,7 @@ const Navbar = () => {
             </Link>
             <div className="flex items-center gap-8">
                 <NavItems />
+                <BecomePro />
                 <SignedOut>
                     <div className="flex items-center gap-2 text-sm">
                         <SignInButton mode='modal'>
