@@ -20,11 +20,20 @@ const ProfilePage = async () => {
   const companions = await getUserComapanion(user.id)
 
   const sessionHistory = await userSession(user.id)
-
+  // Format lastActiveAt to IST timezone string, or "Unknown" if missing
   const LastActive = user?.lastActiveAt
-    ? new Date(user.lastActiveAt).toLocaleString()
+    ? new Date(user.lastActiveAt).toLocaleString("en-IN", {
+      timeZone: "Asia/Kolkata",
+      hour12: true,
+      hour: "numeric",
+      minute: "numeric",
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    })
     : "Unknown";
 
+  // Check if user was active in the last 5 minutes
   const isUserActive = (lastActiveAt: number | null | undefined) => {
     if (!lastActiveAt) return false;
 
