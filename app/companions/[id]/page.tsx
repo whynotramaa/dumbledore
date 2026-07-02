@@ -1,8 +1,8 @@
 import CompanionComponent from "@/components/CompanionComponent";
+import SubjectIcon from "@/components/SubjectIcon";
 import { getCompanion } from "@/lib/actions/companion.actions";
-import { getSubjectColor } from "@/lib/utils";
 import { currentUser } from "@clerk/nextjs/server";
-import Image from "next/image";
+import { Clock } from "lucide-react";
 import { redirect } from "next/navigation";
 
 interface PageProps {
@@ -10,11 +10,6 @@ interface PageProps {
     id: string;
   }>
 }
-
-// params --> /url/{id} so here we can extract id
-// searchParams --> /url?key=value...
-
-
 
 const CompanionSessionPage = async ({ params }: PageProps) => {
 
@@ -27,32 +22,25 @@ const CompanionSessionPage = async ({ params }: PageProps) => {
   if (!user) redirect('/sign-in')
   if (!companion) redirect('/companions')
 
-
   return (
-    <main>
-      <article className="flex border rounded-2xl max-md:m-4 max-md:rounded-4xl justify-between p-6 max-md:flex-col">
-        <div className="flex items-center max-md:justify-center max-md:items-center gap-3">
-          <div className="size-[52px] flex items-center justify-center rounded-xl max-md:hidden" style={{ backgroundColor: getSubjectColor(companion.subject) }}>
-            <Image src={`/icons/${companion.subject}.svg`} alt={companion.subject} width={20} height={20} />
-          </div>
-          <div className="flex flex-col">
+    <main className="max-w-[1000px]">
+      <article className="panel flex items-center justify-between gap-4 p-4 md:p-5 animate-rise">
+        <div className="flex min-w-0 items-center gap-3.5">
+          <SubjectIcon subject={companion.subject} className="size-12" iconClassName="size-5.5" />
+          <div className="flex min-w-0 flex-col">
             <div className="flex items-center gap-2">
-              <p className="font-bold text-lg">
-                {companion.name}
-              </p>
-              <div className="subject-badge text-xs max-sm:hidden">
-                {companion.subject}
-              </div>
+              <p className="truncate font-semibold">{companion.name}</p>
+              <span className="subject-badge max-sm:hidden">{companion.subject}</span>
             </div>
-            <p className="text-sm">
-              {companion.topic}
-            </p>
+            <p className="truncate text-sm text-muted-foreground">{companion.topic}</p>
           </div>
         </div>
-        <div className="items-start text-sm font-semibold text-green-700 max-md:hidden">
-          {companion.duration} minutes
+        <div className="flex shrink-0 items-center gap-1.5 rounded-full bg-secondary px-3 py-1.5 text-sm font-medium text-muted-foreground max-sm:hidden">
+          <Clock className="size-3.5" />
+          {companion.duration} min
         </div>
       </article>
+
       <CompanionComponent
         {...companion}
         companionId={id}

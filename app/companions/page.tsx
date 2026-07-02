@@ -3,6 +3,7 @@ import SearchInput from "@/components/SearchInput";
 import SubjectFilter from "@/components/SubjectFilter";
 import { getAllCompanions } from "@/lib/actions/companion.actions";
 import { getSubjectColor } from "@/lib/utils";
+import { SearchX } from "lucide-react";
 
 const CompanionPage = async ({ searchParams }: SearchParams) => {
 
@@ -13,29 +14,38 @@ const CompanionPage = async ({ searchParams }: SearchParams) => {
 
     const companions = await getAllCompanions({ subject, topic })
 
-    console.log('COMPANIONS: ', companions)
-
-
     return (
         <main>
-            <section className="flex justify-between gap-4 max-sm:flex-col">
-                <h1>
-                    Companion Library
-                </h1>
-                <div className="flex gap-4">
+            <section className="flex flex-col gap-4 animate-rise sm:flex-row sm:items-end sm:justify-between">
+                <div className="flex flex-col gap-2">
+                    <span className="eyebrow">Library</span>
+                    <h1>Companion Library</h1>
+                </div>
+                <div className="flex gap-3">
                     <SearchInput />
                     <SubjectFilter />
                 </div>
             </section>
 
-            <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {companions.map((companion) => (
-                    <CompanionCard key={companion.id} {...companion} color={getSubjectColor(companion.subject)} />
-                ))}
-            </section>
-
-
-
+            {companions.length > 0 ? (
+                <section className="companions-grid animate-rise">
+                    {companions.map((companion) => (
+                        <CompanionCard key={companion.id} {...companion} color={getSubjectColor(companion.subject)} />
+                    ))}
+                </section>
+            ) : (
+                <section className="flex flex-col items-center gap-4 rounded-2xl border border-dashed border-border py-24 text-center animate-fade">
+                    <div className="flex size-14 items-center justify-center rounded-full bg-secondary text-muted-foreground">
+                        <SearchX className="size-6" />
+                    </div>
+                    <div className="flex flex-col gap-1">
+                        <p className="text-lg font-semibold">No companions found</p>
+                        <p className="max-w-sm text-sm text-muted-foreground">
+                            Try adjusting your search or filters to find what you&apos;re looking for.
+                        </p>
+                    </div>
+                </section>
+            )}
         </main>
     )
 }

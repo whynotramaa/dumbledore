@@ -1,16 +1,9 @@
 import CompanionList from "@/components/CompanionList"
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
 import { getUserComapanion, userSession } from "@/lib/actions/companion.actions"
 import { currentUser } from "@clerk/nextjs/server"
-import { Wifi, WifiHighIcon } from "lucide-react"
+import { CheckCircle2, GraduationCap } from "lucide-react"
 import Image from "next/image"
 import { redirect } from "next/navigation"
-
 
 const ProfilePage = async () => {
 
@@ -18,9 +11,8 @@ const ProfilePage = async () => {
   if (!user) redirect('/sign-in')
 
   const companions = await getUserComapanion(user.id)
-
   const sessionHistory = await userSession(user.id)
-  // Format lastActiveAt to IST timezone string, or "Unknown" if missing
+
   const LastActive = user?.lastActiveAt
     ? new Date(user.lastActiveAt).toLocaleString("en-IN", {
       timeZone: "Asia/Kolkata",
@@ -33,74 +25,58 @@ const ProfilePage = async () => {
     })
     : "Unknown";
 
-  // Check if user was active in the last 5 minutes
   const isUserActive = (lastActiveAt: number | null | undefined) => {
     if (!lastActiveAt) return false;
-
     const now = Date.now();
-    const fiveMinutes = 5 * 60 * 1000; // 5 minutes in ms
-
+    const fiveMinutes = 5 * 60 * 1000;
     return now - lastActiveAt < fiveMinutes;
   };
 
+  const active = isUserActive(user?.lastActiveAt)
 
+  const stats = [
+    { label: "Lessons completed", value: sessionHistory.length, Icon: CheckCircle2 },
+    { label: "Companions created", value: companions.length, Icon: GraduationCap },
+  ]
 
   return (
-    <main className='min-lg:w-3/4'>
-      <section className="flex justify-between gap-4 max-sm:flex-col items-center">
-
-        <Image src={user.imageUrl!} alt={user.fullName!} width={110} height={110} className="rounded-lg shadow-2xl" />
-        <div className="flex flex-col justify-center max-md:items-center gap-2">
-          <h1 className="font-bold text-xl">
-            {user.firstName!} {user.lastName!}
-          </h1>
-          <p className="text-sm flex-col text-muted-foreground">
-            {user.emailAddresses[0].emailAddress}
-
-            <div className="flex justify-center items-center gap-2">
-              {isUserActive(user?.lastActiveAt) ? (
-                <span className="flex items-center gap-1">
-                  <Wifi className="w-4 text-green-500" />
-                  Active Now
-                </span>
-              ) : (
-                <span className="flex items-center gap-1">
-                  <WifiHighIcon className="w-4 text-red-500" />
-                  {LastActive} IST
-                </span>
-              )}
+    <main>
+      <section className="panel flex flex-col gap-6 p-6 animate-rise md:flex-row md:items-center md:justify-between md:p-8">
+        <div className="flex items-center gap-5 max-md:flex-col max-md:text-center">
+          <Image
+            src={user.imageUrl!}
+            alt={user.fullName!}
+            width={88}
+            height={88}
+            className="size-[88px] rounded-2xl object-cover shadow-[var(--shadow-md)]"
+          />
+          <div className="flex flex-col gap-1.5 max-md:items-center">
+            <h1 className="text-2xl">{user.firstName!} {user.lastName!}</h1>
+            <p className="text-sm text-muted-foreground">{user.emailAddresses[0].emailAddress}</p>
+            <div className="mt-0.5 flex items-center gap-1.5 text-xs">
+              <span className={active ? "size-2 rounded-full bg-success" : "size-2 rounded-full bg-muted-foreground/50"} />
+              <span className="text-muted-foreground">
+                {active ? "Active now" : `Last active ${LastActive} IST`}
+              </span>
             </div>
-
-          </p>
+          </div>
         </div>
-        <div className="flex gap-4">
-          <div className="border  rounded-lg p-3 gap-2 flex flex-col h-fit">
-            <div className="flex gap-2 items-center">
-              <Image src='/icons/check.svg' alt="check-icon" width={22} height={22} />
-              <p className="text-2xl font-bold">
-                {sessionHistory.length}
-              </p>
+
+        <div className="grid grid-cols-2 gap-3">
+          {stats.map(({ label, value, Icon }) => (
+            <div key={label} className="flex flex-col gap-2 rounded-xl border border-border bg-surface p-4">
+              <Icon className="size-5 text-primary" />
+              <p className="text-2xl font-bold tracking-[-0.02em]">{value}</p>
+              <p className="text-xs text-muted-foreground">{label}</p>
             </div>
-            <div>
-              Lessons Completed
-            </div>
-          </div>
-          <div className="border  rounded-lg p-3 gap-2 flex flex-col h-fit">
-            <div className="flex gap-2 items-center">
-              <Image src='/icons/cap.svg' alt="cap-icon" width={22} height={22} />
-              <p className="text-2xl font-bold">
-                {companions.length}
-              </p>
-            </div>
-            <div>
-              Companions Created
-            </div>
-          </div>
+          ))}
         </div>
       </section>
-      <CompanionList title="Recent Sessions" companions={sessionHistory} />
-      <CompanionList title="My Companions" companions={companions} />
 
+      <div className="flex flex-col gap-6 animate-rise">
+        <CompanionList title="Recent sessions" companions={sessionHistory} />
+        <CompanionList title="My companions" companions={companions} />
+      </div>
     </main>
   )
 }

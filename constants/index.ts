@@ -7,13 +7,31 @@ export const subjects = [
   "economics",
 ];
 
+/**
+ * Per-subject theme — refined, gallery-grade accents that sit inside the
+ * warm near-achromatic design system. Each subject has a soft `tint`
+ * (always-light tile background, works in both color schemes) and a
+ * saturated `ink` used for the glyph + accents. Kept intentionally
+ * desaturated so nothing screams against the ember-orange brand.
+ */
+export const subjectsTheme = {
+  science: { tint: "oklch(0.93 0.035 300)", ink: "oklch(0.52 0.16 300)" },
+  maths: { tint: "oklch(0.945 0.045 80)", ink: "oklch(0.58 0.13 66)" },
+  language: { tint: "oklch(0.93 0.035 240)", ink: "oklch(0.54 0.14 250)" },
+  coding: { tint: "oklch(0.93 0.038 355)", ink: "oklch(0.56 0.17 355)" },
+  history: { tint: "oklch(0.935 0.038 45)", ink: "oklch(0.55 0.14 40)" },
+  economics: { tint: "oklch(0.93 0.032 160)", ink: "oklch(0.5 0.12 160)" },
+} as const;
+
+// Back-compat: single color per subject (the soft tint) used where a
+// legacy `color` string is expected.
 export const subjectsColors = {
-  science: "#E5D0FF",
-  maths: "#FFDA6E",
-  language: "#BDE7FF",
-  coding: "#FFC8E4",
-  history: "#FFECC8",
-  economics: "#C8FFDF",
+  science: subjectsTheme.science.tint,
+  maths: subjectsTheme.maths.tint,
+  language: subjectsTheme.language.tint,
+  coding: subjectsTheme.coding.tint,
+  history: subjectsTheme.history.tint,
+  economics: subjectsTheme.economics.tint,
 };
 
 export const voices = {

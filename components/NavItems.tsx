@@ -5,32 +5,33 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 const navItems = [
-    {
-        label: "Home",
-        href: "/"
-    },
-    {
-        label: "Companions",
-        href: "/companions"
-    },
-    {
-        label: "My Journey",
-        href: "/my-journey"
-    },
-
+    { label: "Home", href: "/" },
+    { label: "Companions", href: "/companions" },
+    { label: "My Journey", href: "/my-journey" },
 ]
-const NavItems = () => {
 
-    const pathname = usePathname() // as we are using hook, we mjust turn entire thing is client component 
+const NavItems = () => {
+    const pathname = usePathname()
 
     return (
-        <nav className='flex items-center gap-4 text-xs md:text-sm'>
-            {navItems.map(({ label, href }) => ( /* we are not using {} bcz we need to directly return stuffs and not do any JS logic */
-                <Link href={href} key={label} className={cn(pathname === href && 'text-primary font-semibold')} >
-                    {label}
-                </Link>
-            ))}
-
+        <nav className="flex items-center gap-0.5 rounded-full bg-secondary/60 p-1">
+            {navItems.map(({ label, href }) => {
+                const active = pathname === href
+                return (
+                    <Link
+                        href={href}
+                        key={label}
+                        className={cn(
+                            "relative rounded-full px-3 py-1.5 text-[13px] font-medium transition-colors duration-200 md:text-sm",
+                            active
+                                ? "bg-card text-foreground shadow-[var(--shadow-xs)]"
+                                : "text-muted-foreground hover:text-foreground"
+                        )}
+                    >
+                        {label}
+                    </Link>
+                )
+            })}
         </nav>
     )
 }
