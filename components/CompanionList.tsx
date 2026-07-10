@@ -7,7 +7,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { cn } from "@/lib/utils";
-import { Clock, Sparkles } from "lucide-react";
+import { Clock, Snail } from "lucide-react";
 import Link from "next/link";
 import SubjectIcon from "./SubjectIcon";
 
@@ -76,7 +76,7 @@ const CompanionList = ({ title, companions, className }: CompanionsListProps) =>
             ) : (
                 <div className="flex flex-col items-center gap-3 px-6 py-16 text-center">
                     <div className="flex size-12 items-center justify-center rounded-full bg-secondary text-muted-foreground">
-                        <Sparkles className="size-5" />
+                        <Snail className="size-5" />
                     </div>
                     <div className="flex flex-col gap-1">
                         <p className="font-medium">Nothing here yet</p>

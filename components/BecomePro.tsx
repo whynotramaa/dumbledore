@@ -1,5 +1,5 @@
 import { auth } from '@clerk/nextjs/server'
-import { Sparkles } from 'lucide-react'
+import { Snail } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
@@ -13,7 +13,7 @@ const BecomePro = async () => {
                 href="/subscription"
                 className="hidden items-center gap-1.5 rounded-full border border-border px-3.5 py-1.5 text-sm font-medium transition-all duration-200 hover:border-primary hover:text-primary md:inline-flex"
             >
-                <Sparkles className="size-3.5" />
+                <Snail className="size-3.5" />
                 Become a Pro
             </Link>
         )
@@ -23,7 +23,7 @@ const BecomePro = async () => {
             href="/companions/new"
             className="hidden items-center gap-1.5 rounded-full border border-border px-3.5 py-1.5 text-sm font-medium transition-all duration-200 hover:border-primary hover:text-primary md:inline-flex"
         >
-            <Sparkles className="size-3.5" />
+            <Snail className="size-3.5" />
             New Companion
         </Link>
     )

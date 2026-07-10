@@ -1,5 +1,5 @@
 import { PricingTable } from '@clerk/nextjs'
-import { Infinity as InfinityIcon, Sparkles, Waves, Headphones } from 'lucide-react'
+import { Infinity as InfinityIcon, Snail, Waves, Headphones } from 'lucide-react'
 import React from 'react'
 
 const perks = [
